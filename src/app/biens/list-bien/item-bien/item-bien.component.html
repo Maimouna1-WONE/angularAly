@@ -1,0 +1,14 @@
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="https://source.unsplash.com/1080x720/?{{ bienvalue.image }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" [innerText]="bienvalue.title | uppercase"></h5>
+    <p class="card-text">{{ bienvalue.description | summarize: 50}}</p>
+    <hr>
+    <!--<span class="float-left btn btn-sm btn-outline-danger disabled">{{ utilservice.formatMillier(bienvalue.price, '.') }} Fcfa</span> -->
+    <!--<span class="float-left btn btn-sm text-center disabled">Il y a {{ bienvalue.createdAt | date: 'h' }} heures</span> -->
+    <span class="float-left btn btn-sm btn-outline-danger disabled">{{ bienvalue.price | separator: '.' }} Fcfa</span>
+    <span class="float-left btn btn-sm text-center disabled">Il y a {{ bienvalue.createdAt | timeleft }}</span>
+    <a class="btn btn-sm float-right btn-primary" [routerLink]="['/biens', bienvalue.id]">Detail</a>
+  </div>
+</div>
+<!-- <button (click)="sending()">send</button> -->

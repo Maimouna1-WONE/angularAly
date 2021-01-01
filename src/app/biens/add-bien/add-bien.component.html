@@ -1,0 +1,72 @@
+<div class="row mt-5">
+  <h6 class="display-4">Ajout d'un Bien</h6>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-5" style="border-right: 1px solid black;">
+    <p class="pr-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta, sint consequuntur repudiandae incidunt earum dignissimos ab corporis temporibus, nisi natus fuga. Laudantium deserunt pariatur ipsam dolor, fugiat, nam in iusto eos necessitatibus architecto officia voluptates. Voluptate alias consequuntur doloribus repellendus! Accusamus ducimus officiis nesciunt minima in ea quas earum quidem corporis fuga error dolorem culpa.</p>
+    <hr>
+    <p class="pr-5">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, id!
+    </p>
+    <p class="pr-5">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit, modi hic! Quia, doloremque vitae, sint amet alias illo provident ea itaque quis accusantium quidem cupiditate nostrum maxime aliquid velit recusandae neque dignissimos ullam sequi aperiam possimus molestiae maiores hic. Modi, voluptatem nulla! Labore sint necessitatibus sed eveniet eos similique error quis dolor, dignissimos ducimus ipsum est iusto voluptatum unde veniam.
+    </p>
+  </div>
+  <div class="col">
+    <form class="p-5" [formGroup]="bienForm" (ngSubmit)="OnSubmit()">
+      <div class="form-group">
+        <label for="libelle">Titre</label>
+        <input type="text" [formControlName]="'title'" class="form-control" id="libelle" placeholder="Entrer le libellé du bien">
+        <small class="blockquote-footer">50 caractères max</small>
+        <small class="text-danger" *ngIf="bienForm.get('title').errors['titleForbidden']">this one is forbidden</small>
+      <!--  <small *ngIf="!bienForm.get('title').valid && bienForm.get('title').touched" class="text-danger">Please entrer une valeur</small>-->
+      </div>
+      <div class="form-group">
+        <label for="libelle">Prix</label>
+        <input type="number" [formControlName]="'price'" class="form-control" id="prix" placeholder="Entrer le Prix du bien">
+      </div>
+      <div class="form-group">
+        <label for="description">Déscription</label>
+        <small class="blockquote-footer">500 caractères max</small>
+        <textarea [formControlName]="'description'" class="form-control" id="description" rows="5" placeholder="Un text descriptif du bien"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="categorie">Catégorie</label>
+        <select [formControlName]="'category'" class="form-control" id="categorie">
+          <option>Véhicule</option>
+          <option>Informatique</option>
+          <option>Bureau</option>
+          <option>Immobilier</option>
+          <option>Autres</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputFile">Url de l' Image</label>
+        <div class="row">
+          <div class="col-10">
+            <input [formControlName]="'image'" type="text" class="form-control" placeholder="coller l'url de l'image" id="exampleInputFile" aria-describedby="fileHelp">
+          </div>
+          <div>
+            <button class="btn btn-outline-success" type="button" (click)="OnAddSecImage()">+</button>
+          </div>
+        </div>
+        <div formArrayName="imageSec">
+        <div class="form-group mt-2" *ngFor="let imgsec of getImgSecControls(); let i=index;">
+          <input type="text" class="form-control" [formControlName]="i">
+        </div>
+        </div>
+       <small id="fileHelp" class="blockquote-footer">Veillez prendre une image prise par vous-même du bien pour pouvoir représenter fidèlement votre bien.</small>
+      </div>
+      <div class="form-check" *ngFor="let option of options">
+        <label class="form-check-label">
+          <input [formControlName]="'sale'" type="radio" class="form-check-input" name="sale" id="name" [value]="option" checked="">
+          {{option}}
+        </label>
+      </div>
+      <hr>
+      <button type="submit" class="btn btn-primary float-right">Ajouter</button>
+     <!-- <button [disabled]="!bienForm.valid" type="submit" class="btn btn-primary float-right">Ajouter</button>-->
+    </form>
+  </div>
+</div>
